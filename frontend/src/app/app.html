@@ -1,0 +1,13 @@
+<main class="hello">
+  @if (hello.hasValue()) {
+    <h1>{{ hello.value().message }}</h1>
+    <p>Mensagem vinda da API Quarkus.</p>
+  } @else if (hello.error()) {
+    <h1>Ops!</h1>
+    <p class="error">Não foi possível conectar à API. O backend está rodando na porta 8080?</p>
+  } @else {
+    <p>Carregando...</p>
+  }
+</main>
+
+<router-outlet />
