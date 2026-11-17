@@ -1,0 +1,90 @@
+<div class="chat">
+  <header>
+    <h1>Assistente de transações</h1>
+    <p>Pergunte sobre as transações: a resposta vem como gráfico, número ou tabela.</p>
+  </header>
+
+  <section class="messages" aria-live="polite" [attr.aria-busy]="running()">
+    @if (items().length === 0) {
+      <div class="empty">
+        <p>Experimente um destes pedidos:</p>
+        <ul>
+          @for (suggestion of suggestions; track suggestion) {
+            <li>
+              <button type="button" class="suggestion" [disabled]="running()" (click)="send(suggestion)">
+                {{ suggestion }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @for (item of items(); track item.id) {
+      @switch (item.kind) {
+        @case ('user') {
+          <p class="message user">{{ item.text }}</p>
+        }
+        @case ('assistant') {
+          <p class="message assistant">{{ item.text }}</p>
+        }
+        @case ('chart') {
+          <!-- O Chart.js só é baixado quando o primeiro gráfico aparece. -->
+          @defer {
+            <app-chart-view class="visual-item" [spec]="item.spec" />
+          } @placeholder {
+            <p class="status">Gerando gráfico…</p>
+          }
+        }
+        @case ('stat') {
+          <app-stat-card class="visual-item" [spec]="item.spec" />
+        }
+        @case ('table') {
+          <app-table-view class="visual-item" [spec]="item.spec" />
+        }
+        @case ('tool-pending') {
+          <p class="status">Consultando os dados…</p>
+        }
+      }
+    }
+
+    @if (thinking()) {
+      <p class="status">Pensando…</p>
+    }
+
+    @if (followUps().length > 0) {
+      <div class="follow-ups">
+        <p id="follow-ups-label">Para continuar:</p>
+        <ul aria-labelledby="follow-ups-label">
+          @for (suggestion of followUps(); track suggestion) {
+            <li>
+              <button type="button" class="suggestion follow-up" (click)="send(suggestion)">{{ suggestion }}</button>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (error(); as message) {
+      <p class="error" role="alert">
+        <strong>Não foi possível concluir a resposta.</strong>
+        {{ message }}
+      </p>
+    }
+
+    <div #end class="end"></div>
+  </section>
+
+  <form class="composer" (submit)="submit($event)">
+    <label class="visually-hidden" for="draft">Mensagem</label>
+    <textarea
+      #input
+      id="draft"
+      rows="1"
+      placeholder="Pergunte sobre as transações…"
+      (input)="onInput($event)"
+      (keydown)="onKeydown($event)"
+    ></textarea>
+    <button type="submit" [disabled]="running() || !draft().trim()">Enviar</button>
+  </form>
+</div>

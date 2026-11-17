@@ -1,5 +1,7 @@
 package br.com.projetoia;
 
+import br.com.projetoia.domain.TransactionCategory;
+import br.com.projetoia.domain.TransactionStatus;
 import br.com.projetoia.domain.TransactionType;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
@@ -8,6 +10,8 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,6 +51,20 @@ class SeedDataTest {
 
         assertEquals(45L, total);
         assertEquals(total, distinctAmounts);
+    }
+
+    @Test
+    @Transactional
+    void everyCategoryAndStatusIsUsed() {
+        Long categories = em.createQuery("select count(distinct t.category) from Transaction t", Long.class)
+                .getSingleResult();
+        List<Object[]> perStatus = em
+                .createQuery("select t.status, count(t) from Transaction t group by t.status", Object[].class)
+                .getResultList();
+
+        assertEquals((long) TransactionCategory.values().length, categories);
+        assertEquals(Map.of(TransactionStatus.CONCLUIDA, 37L, TransactionStatus.RECUSADA, 5L, TransactionStatus.ESTORNADA, 3L),
+                perStatus.stream().collect(Collectors.toMap(row -> (TransactionStatus) row[0], row -> (Long) row[1])));
     }
 
     @Test

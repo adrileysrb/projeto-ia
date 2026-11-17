@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+
+.chart {
+  margin: 0;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+figcaption h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+figcaption p {
+  margin: 2px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+/* A altura vem do componente, conforme o tipo de gráfico. */
+.plot {
+  position: relative;
+  margin-top: 12px;
+}
+
+details {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+summary {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.table-scroll {
+  max-height: 240px;
+  margin-top: 8px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--grid);
+  text-align: right;
+  white-space: nowrap;
+}
+
+th[scope='row'],
+thead th:first-child {
+  text-align: left;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+tbody th {
+  font-weight: 400;
+}

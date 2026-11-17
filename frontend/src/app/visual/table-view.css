@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  /* Sem isto, a largura mínima da tabela empurraria a coluna do chat para fora da tela. */
+  min-width: 0;
+}
+
+.table-card {
+  margin: 0;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+figcaption h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+figcaption p {
+  margin: 2px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+.table-scroll {
+  max-height: 420px;
+  margin-top: 12px;
+  overflow: auto;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid var(--series-1);
+  outline-offset: 2px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid var(--grid);
+  text-align: left;
+  white-space: nowrap;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+td {
+  color: var(--ink-2);
+}
+
+.amount {
+  text-align: right;
+}
+
+td.amount {
+  color: var(--ink);
+}
+
+.summary {
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}

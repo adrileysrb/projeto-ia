@@ -1,0 +1,38 @@
+<figure class="table-card">
+  <figcaption>
+    <h3>{{ spec().title }}</h3>
+    @if (spec().subtitle) {
+      <p>{{ spec().subtitle }}</p>
+    }
+  </figcaption>
+
+  <!-- A tabela rola dentro do cartão, para a página nunca ganhar rolagem horizontal. -->
+  <div class="table-scroll" tabindex="0" role="region" [attr.aria-label]="spec().title">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Usuário</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Situação</th>
+          <th scope="col" class="amount">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track $index) {
+          <tr>
+            <td>{{ row.date }}</td>
+            <td>{{ row.user }}</td>
+            <td>{{ row.type }}</td>
+            <td>{{ row.category }}</td>
+            <td>{{ row.status }}</td>
+            <td class="amount">{{ row.amount }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="summary">{{ summary() }}</p>
+</figure>

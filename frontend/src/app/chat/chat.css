@@ -1,0 +1,199 @@
+:host {
+  display: block;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+header {
+  padding: 24px 0 8px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+header p {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0 24px;
+}
+
+.message {
+  margin: 0;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.message.user {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 10px 14px;
+  background: var(--surface-raised);
+  border-radius: 16px 16px 4px 16px;
+}
+
+.message.assistant {
+  max-width: 100%;
+}
+
+.visual-item {
+  width: 100%;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.error {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  background: var(--danger-surface);
+  border: 1px solid var(--danger-border);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.error strong {
+  display: block;
+}
+
+.empty p {
+  margin: 0 0 8px;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.empty ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestion {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.suggestion:hover:not(:disabled) {
+  background: var(--surface-raised);
+}
+
+/* Próximas perguntas sugeridas: botões menores, lado a lado, logo abaixo da resposta. */
+.follow-ups p {
+  margin: 4px 0 8px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
+.follow-ups ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.follow-up {
+  width: auto;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  border-radius: 999px;
+}
+
+.end {
+  height: 1px;
+  scroll-margin-bottom: 96px;
+}
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding: 12px 0 16px;
+  background: var(--page);
+}
+
+.composer textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 160px;
+  padding: 11px 14px;
+  font: inherit;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  resize: none;
+  field-sizing: content;
+}
+
+.composer textarea::placeholder {
+  color: var(--muted);
+}
+
+.composer button {
+  height: 44px;
+  padding: 0 18px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--page);
+  background: var(--ink);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.composer button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+:is(textarea, button):focus-visible {
+  outline: 2px solid var(--series-1);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

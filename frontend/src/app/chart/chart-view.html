@@ -1,0 +1,42 @@
+<figure class="chart">
+  <figcaption>
+    <h3>{{ spec().title }}</h3>
+    @if (spec().subtitle) {
+      <p>{{ spec().subtitle }}</p>
+    }
+  </figcaption>
+
+  <div class="plot" [style.height.px]="plotHeight()">
+    <canvas
+      #canvas
+      role="img"
+      [attr.aria-label]="spec().title + '. ' + spec().subtitle + '. Os valores estão na tabela abaixo.'"
+    ></canvas>
+  </div>
+
+  <details>
+    <summary>Ver dados</summary>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            @for (series of spec().series; track series.name) {
+              <th scope="col">{{ series.name }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track row.label) {
+            <tr>
+              <th scope="row">{{ row.label }}</th>
+              @for (value of row.values; track $index) {
+                <td>{{ value }}</td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </details>
+</figure>

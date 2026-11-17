@@ -1,0 +1,21 @@
+<section class="stat">
+  <h3>{{ spec().title }}</h3>
+  <p class="value">{{ value() }}</p>
+  @if (spec().subtitle) {
+    <p class="subtitle">{{ spec().subtitle }}</p>
+  }
+  @if (comparison(); as comparison) {
+    <p class="comparison">
+      <!-- A seta só reforça o texto, que já diz "acima" ou "abaixo". -->
+      @switch (comparison.direction) {
+        @case ('up') {
+          <span class="arrow" aria-hidden="true">▲</span>
+        }
+        @case ('down') {
+          <span class="arrow" aria-hidden="true">▼</span>
+        }
+      }
+      {{ comparison.text }}
+    </p>
+  }
+</section>
